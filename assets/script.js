@@ -1,30 +1,52 @@
 var today = moment();
 var currentHour = moment().hour();
-var hour9 = document.querySelector('#hour-9');
-var hour10 = document.querySelector('#hour-10');
-var hour11 = document.querySelector('#hour-11');
-var hour12 = document.querySelector('#hour-12');
-var hour1 = document.querySelector('#hour-13');
-var hour2 = document.querySelector('#hour-14');
-var hour3 = document.querySelector('#hour-15');
-var hour4 = document.querySelector('#hour-16');
-var hour5 = document.querySelector('#hour-17');
-var workHours =[hour9,hour10,hour11,hour12,hour1,hour2,hour3,hour4,hour5];
+var message = document.querySelector('.popUpComments');
+var saveBtn = document.querySelector('.saveBtn');
 
-
+// formats the current day for the page header
 $('#currentDay').text(today.format("dddd, MMMM Do, YYYY"));
 
-// for( var i=0; i< answerButtons.length; i++){
-//     var button= answerButtons[i];
-//     button.addEventListener("click",submitAnswer);
-// }
-
+// Runs program to color code the workday according to current hour as soon as page loads.
+whatHourIsIt();
+renderPreviousSavedInfo();
 console.log(currentHour);
 
+saveBtn.addEventListener("click", saveAllInputs);
+
 function whatHourIsIt(){
-    if (currentHour = 2){
-        hour10.setAttribute("class", "present")
+    if (currentHour >17||currentHour < 9){
+        message.textContent = ("Your work day has not started it. Enjoy your time.")
+        return;
     }
-    console.log("the hour has changed");
+
+        // sting interp gives back the value of currentHour
+    var relevantHour = document.querySelector(`#hour-${currentHour}`);
+    relevantHour.classList.add("present");
+
+    for(i=currentHour+1; i<18; i++){
+        var relevantHour = document.querySelector(`#hour-${i}`);
+    relevantHour.classList.add("future");
+    }
+    for(i=currentHour-1; i>8; i--){
+        var relevantHour = document.querySelector(`#hour-${i}`);
+    relevantHour.classList.add("past");
+    }
 }
-whatHourIsIt();
+
+function renderPreviousSavedInfo(){
+    var userInputs = localStorage.getItem(".description");
+    
+    
+}
+
+function saveAllInputs(){
+    message.textContent = ("Successfully Saved ✅")
+    message.classList.add("successfullySaved");
+    var 
+
+}
+
+
+
+
+
